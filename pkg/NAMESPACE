@@ -1,0 +1,16 @@
+import("Rgraphviz")
+import("gcExplorer")
+
+export(
+   "grid.barplot",
+   "grid.bxp",
+   "grid.matplot",
+   "grid.pie",
+   "grid.stars",
+   "grid.symbols",
+   "gridnodes"
+   )
+
+exportMethods(
+   "symbolplot"
+   )

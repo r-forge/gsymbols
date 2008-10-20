@@ -1,0 +1,15 @@
+Package: symbols
+Type: Package
+Title: Visualization Tools for Cluster Solutions
+Depends: grid, flexclust
+Imports: methods, grid, stats, stats4, graphics, flexclust, Rgraphviz,
+  gcExplorer
+Suggests: gcExplorer
+Version: 0.10
+Date: 2008-10-16
+Author: Ingo Voglhuber
+Maintainer: Ingo Voglhuber <ingo.voglhuber@aon.at>
+Description: Several tools for visualization of cluster solutions for
+  flexclust and gcExplorer.
+License: GPL-2
+LazyLoad: yes
