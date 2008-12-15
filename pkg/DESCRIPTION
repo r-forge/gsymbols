@@ -5,8 +5,8 @@ Depends: grid, flexclust
 Imports: methods, grid, stats, stats4, graphics, flexclust, Rgraphviz,
   gcExplorer
 Suggests: gcExplorer
-Version: 0.10
-Date: 2008-10-16
+Version: 0.11
+Date: 2008-12-15
 Author: Ingo Voglhuber
 Maintainer: Ingo Voglhuber <ingo.voglhuber@aon.at>
 Description: Several tools for visualization of cluster solutions for

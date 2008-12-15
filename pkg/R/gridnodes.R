@@ -38,8 +38,9 @@
       for (i in seq(along=AgNode(graph))) {
          vp <- viewport(x = vp.pos.x[i], y = vp.pos.y[i],
                         width = vp.widths[i], height = vp.heights[i])
+         j <- as.numeric(gsub("k","",graph@AgNode[[i]]@name))
          pushViewport(vp)
-           node.function(object = object, cluster = i, bgdata = bgdata)
+           node.function(object = object, cluster = j, bgdata = bgdata)
          popViewport()
       }
    popViewport()
