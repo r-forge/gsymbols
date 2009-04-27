@@ -1,12 +1,12 @@
-\name{grid.bxp}
-\alias{grid.bxp}
+\name{symb.bxp}
+\alias{symb.bxp}
 \title{ Draw Grid-Based Box Plots from Summaries }
 \description{
   \code{bxp} draws grid-based box plots based on the given summaries in
   \code{z}.
 }
 \usage{
-grid.bxp(z, notch = FALSE, width = NULL, varwidth = FALSE, 
+symb.bxp(z, notch = FALSE, width = NULL, varwidth = FALSE, 
          outline = TRUE, notch.frac = 0.5, border = par("fg"), 
          pars = NULL, frame.plot = FALSE, horizontal = FALSE, 
          at = NULL, xaxis = FALSE, yaxis = FALSE, ...)
@@ -99,9 +99,9 @@ grid.bxp(z, notch = FALSE, width = NULL, varwidth = FALSE,
   }
 \author{ Original code by the R Core development team and Arni Magnusson.
          Modified by Ingo Voglhuber. }
-\seealso{ \code{\link{grid.barplot}}, \code{\link{grid.matplot}},
-  \code{\link{grid.pie}}, \code{\link{grid.symbols}},
-  \code{\link{grid.bxp}}
+\seealso{ \code{\link{symb.barplot}}, \code{\link{symb.matplot}},
+  \code{\link{symb.pie}}, \code{\link{symb.symbols}},
+  \code{\link{symb.bxp}}
 }
 \examples{
 require(stats)
@@ -110,27 +110,20 @@ set.seed(753)
 
 grid.newpage()
 
-## create viewport
-vp <- viewport(0.25,0.75,0.5,0.5)
-pushViewport(vp)
-grid.bxp(bx.p, yaxis=TRUE, frame.plot=TRUE)
-popViewport()
-## create viewport
-vp <- viewport(0.75,0.75,0.5,0.5)
-pushViewport(vp)
-grid.bxp(bx.p, notch = TRUE, pch = 4, boxfill=1:5)
-popViewport()
-## create viewport
-vp <- viewport(0.75,0.25,0.5,0.5)
-pushViewport(vp)
-grid.bxp(bx.p, notch = TRUE, boxfill= "lightblue",
+symb.bxp(bx.p, yaxis=TRUE, frame.plot=TRUE)
+
+grid.newpage()
+
+symb.bxp(bx.p, notch = TRUE, pch = 4, boxfill=1:5)
+
+grid.newpage()
+
+symb.bxp(bx.p, notch = TRUE, boxfill= "lightblue",
   frame= FALSE, outl= FALSE,xaxis=TRUE,yaxis=TRUE, frame.plot=TRUE)
-popViewport()
-## create viewport
-vp <- viewport(0.25,0.25,0.5,0.5)
-pushViewport(vp)
-grid.bxp(bx.p, notch = TRUE, boxfill= "lightblue",
+
+grid.newpage()
+
+symb.bxp(bx.p, notch = TRUE, boxfill= "lightblue",
   border= 2:6, ylim = c(-4,4), pch = 22, bg = "green", log = "x")
-popViewport()
 }
 \keyword{ hplot }

@@ -1,4 +1,4 @@
-`grid.barplot` <- function(barData, boxColours = 1:4, legLabels = "NA",
+`symb.barplot` <- function(barData, boxColours = 1:4, legLabels = "NA",
 									boxSize = unit(0.5,"inches"),
 									ylim = NULL)
 {

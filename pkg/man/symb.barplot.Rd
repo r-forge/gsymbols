@@ -1,11 +1,11 @@
-\name{grid.barplot}
-\alias{grid.barplot}
+\name{symb.barplot}
+\alias{symb.barplot}
 \title{ Grid-Based Bar Plots }
 \description{
   Creates a bar plot with vertical bars.
 }
 \usage{
-grid.barplot(barData, boxColours = 1:4, legLabels = "NA",
+symb.barplot(barData, boxColours = 1:4, legLabels = "NA",
              boxSize = unit(0.5, "inches"), ylim = NULL)
 }
 \arguments{
@@ -25,18 +25,18 @@ grid.barplot(barData, boxColours = 1:4, legLabels = "NA",
   Simple grid-based barplot.
 }
 \author{ Ingo Voglhuber }
-\seealso{ \code{\link{grid.matplot}}, \code{\link{grid.pie}},
-  \code{\link{grid.stars}}, \code{\link{grid.symbols}}, 
-  \code{\link{grid.bxp}}
+\seealso{ \code{\link{symb.matplot}}, \code{\link{symb.pie}},
+  \code{\link{symb.stars}}, \code{\link{symb.symbols}}, 
+  \code{\link{symb.bxp}}
 }
 \examples{
  grid.newpage()
 
- grid.barplot(c(10,20,50,40), legLabels=c("black item"))
+ symb.barplot(c(10,20,50,40), legLabels=c("black item"))
 
  grid.newpage()
 
- grid.barplot(cbind(c(10,30),c(40,20)), 
+ symb.barplot(cbind(c(10,30),c(40,20)), 
               legLabels=c("black item","red item"))
 }
 \keyword{hplot}

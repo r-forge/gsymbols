@@ -1,4 +1,4 @@
-grid.bxp <- function (z, notch = FALSE, width = NULL, varwidth = FALSE,
+symb.bxp <- function (z, notch = FALSE, width = NULL, varwidth = FALSE,
                       outline = TRUE, notch.frac = 0.5, border = par("fg"),
                       pars = NULL, frame.plot = FALSE, horizontal = FALSE,
                       at = NULL, xaxis = FALSE, yaxis = FALSE, ...) 

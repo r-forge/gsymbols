@@ -1,5 +1,5 @@
-\name{grid.stars}
-\alias{grid.stars}
+\name{symb.stars}
+\alias{symb.stars}
 \title{ Grid-Based 'stars' Function }
 \description{
   Similar to \code{stars} function, but drawn in grid viewport:
@@ -7,7 +7,7 @@
   With one single location, also draws 'spider' (or 'radar') plots.
 }
 \usage{
-grid.stars(x, radius = TRUE, locations = "grid", 
+symb.stars(x, radius = TRUE, locations = "grid", 
            draw.segments = FALSE, scale = TRUE, full = TRUE, 
            qx = apply(x, 2, quantile, probs = seq(0, 1, 0.1)), 
            quantile=FALSE, col.segments=TRUE, col.stars=FALSE, 
@@ -65,8 +65,8 @@ grid.stars(x, radius = TRUE, locations = "grid",
   Only one page of output is produced.
 }
 \author{ Ingo Voglhuber }
-\seealso{ \code{\link{grid.barplot}}, \code{\link{grid.matplot}},
-  \code{\link{grid.pie}}, \code{\link{grid.symbols}}, \code{\link{grid.bxp}}
+\seealso{ \code{\link{symb.barplot}}, \code{\link{symb.matplot}},
+  \code{\link{symb.pie}}, \code{\link{symb.symbols}}, \code{\link{symb.bxp}}
 }
 \examples{
 data(USJudgeRatings)
@@ -74,53 +74,46 @@ grid.newpage()
 
 ## example
 
-grid.stars(USJudgeRatings)
+symb.stars(USJudgeRatings)
 
 grid.newpage()
 
 ## no radii
-grid.stars(USJudgeRatings,radius=FALSE)
+symb.stars(USJudgeRatings,radius=FALSE)
 
 grid.newpage()
 
 ## no labels
-grid.stars(USJudgeRatings, draw.labels=FALSE)
+symb.stars(USJudgeRatings, draw.labels=FALSE)
 
 grid.newpage()
 
 ## segments of a circle
-grid.stars(USJudgeRatings,draw.segments=TRUE)
+symb.stars(USJudgeRatings,draw.segments=TRUE)
 
 grid.newpage()
 
-## create viewport
-vp <- viewport(0.25,0.75,0.5,0.5)
-pushViewport(vp)
 ## spiderplot, no labels
-grid.stars(USJudgeRatings,radius=FALSE, locations="spider", 
+symb.stars(USJudgeRatings,radius=FALSE, locations="spider", 
            draw.labels=FALSE)
-popViewport()
-## create viewport
-vp <- viewport(0.75,0.75,0.5,0.5)
-pushViewport(vp)
+
+grid.newpage()
+
 ## spiderplot with quantiles in background
-grid.stars(USJudgeRatings,radius=FALSE, locations="spider", 
+symb.stars(USJudgeRatings,radius=FALSE, locations="spider", 
            quantile=TRUE)
-popViewport()
-## create viewport
-vp <- viewport(0.75,0.25,0.5,0.5)
-pushViewport(vp)
+
+grid.newpage()
+
 ## spiderplot with quantiles in background
-grid.stars(USJudgeRatings,radius=FALSE, locations="spider",
+symb.stars(USJudgeRatings,radius=FALSE, locations="spider",
   qx=apply(USJudgeRatings,2,quantile,probs=seq(0,1,0.25)) , 
            quantile=TRUE,
   draw.labels=FALSE)
-popViewport()
-## create viewport
-vp <- viewport(0.25,0.25,0.5,0.5)
-pushViewport(vp)
+
+grid.newpage()
+
 ## draw only labels
-grid.stars(USJudgeRatings, key=TRUE)
-popViewport()
+symb.stars(USJudgeRatings, key=TRUE)
 }
 \keyword{hplot}

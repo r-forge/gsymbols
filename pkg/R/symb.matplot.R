@@ -1,4 +1,4 @@
-`grid.matplot` <- function (x, y, type = "p", lty = 1:5, lwd = 1,
+`symb.matplot` <- function (x, y, type = "p", lty = 1:5, lwd = 1,
 									 pch = NULL, col = 1, cex = NULL, xlim = NULL,
 									 ylim = NULL, ..., verbose = getOption("verbose")) 
 {

@@ -1,13 +1,10 @@
-import("Rgraphviz")
-import("gcExplorer")
-
 export(
-   "grid.barplot",
-   "grid.bxp",
-   "grid.matplot",
-   "grid.pie",
-   "grid.stars",
-   "grid.symbols",
+   "symb.barplot",
+   "symb.bxp",
+   "symb.matplot",
+   "symb.pie",
+   "symb.stars",
+   "symb.symbols",
    "gridnodes"
    )
 

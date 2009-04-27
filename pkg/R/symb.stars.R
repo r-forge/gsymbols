@@ -1,4 +1,4 @@
-`grid.stars` <- function(x, radius=TRUE, locations="grid",
+`symb.stars` <- function(x, radius=TRUE, locations="grid",
                          draw.segments=FALSE, scale=TRUE, full=TRUE, 
                          qx=apply(x,2,quantile,probs=seq(0,1,0.1)),
                          quantile=FALSE, col.segments=TRUE, col.stars=FALSE,

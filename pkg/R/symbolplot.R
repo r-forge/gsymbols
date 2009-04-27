@@ -1,25 +1,21 @@
-setGeneric("symbolplot", function(object, ...)
+setGeneric("symbolplot", function(x, y, ...)
         standardGeneric("symbolplot"))
 
-setMethod("symbolplot", signature(object="kcca"),
-function (object, x = NULL, y = NULL, project = NULL, which=1:2,
-          filt= 0.1, node.function = NodeIsCircle,
-          edge.function = EdgeIsLineWidth,
-          bgdata = NULL, xlim = NULL, ylim = NULL,
-          asize = NULL, rsize = NULL, axes = FALSE,
-          keepAspectRatio = TRUE, ...)
+setMethod("symbolplot", signature(x="numeric",y="numeric"),
+function (x, y,
+          node.data = NULL, node.function = NodeIsNumber,
+          edge.data = NULL, edge.function = EdgeIsLineWidth, filt= 0.1,
+          xlim = NULL, ylim = NULL,
+          asize = NULL, rsize = NULL,
+          axes = FALSE,
+          keepAspectRatio = TRUE, 
+          ...)
 {
-   require(flexclust)
-   clsim <- clusterSim(object)
+   # check arguments "x", "y".
+   if (length(x) != length(y))
+      stop ("'x' and 'y' not of same length!")
 
-	# check argument object
-	if (class(object) != "kcca") 
-	   stop ("object has to be of class 'kcca'")
-	
-	# check argument which
-   if(length(which)!=2)
-      stop(sQuote("which"), " must have length 2")
-	# check arguments: asize
+	# check argument "asize".
 	if (!is.null(asize))
 	{
 		if (is.vector(asize))
@@ -45,43 +41,11 @@ function (object, x = NULL, y = NULL, project = NULL, which=1:2,
 		}
 		else stop ("argument rsize has to be a vector of length n")
 	}
-
+	
 	# fire up graphics
    plot.new()
 	#grid.newpage()
-	
-   y <- NULL
-   
-   if (is.null(x))
-   {
-	   # compute 2d-Data from centers
-	   if (is.null(project))
-	   {
-	      project <- function(x) x
-	   }
-	   else
-      {
-	      if(!is(project, "function"))
-	      {
-            lyt <- project
-            project <- function(x) Predict(lyt, x)
-         }
-	   }
-	   x <- project(object@centers)[,which]
-	   y <- x[,2]
-	   x <- x[,1]
-	}
-	else
-	{
-	   if (is.null(y))
-	   {
-	      if (dim(x)[2] != 2)
-	         stop("If y is not given, x must be a matrix with two columns.")
-	      y <- x[,2]
-	      x <- x[,1]
-	   }
-	}
-	
+		
 	# check and ev update the size for the nodes' viewports
 	nsize = GetViewportSizes (x, y, asize, rsize, xlim, ylim)
 	
@@ -108,7 +72,6 @@ function (object, x = NULL, y = NULL, project = NULL, which=1:2,
 	   }
 	}
    
-
 	# now the viewport for the real data
 	pushViewport (dataViewport (xData=corners[1:2],
                                yData=corners[3:4],
@@ -119,32 +82,126 @@ function (object, x = NULL, y = NULL, project = NULL, which=1:2,
 		grid.yaxis()
 		grid.rect()
 	}
-   DrawEdges (x, y, edge.function=edge.function, filt=filt, 
-              object=object, clsim=clsim)
+   DrawEdges(x, y, edge.function = edge.function, filt = filt,
+             edge.data = edge.data)
 	
-   # DrawNode - places a viewport with correct dimension 'round (x,y) and calls
+   # DrawNode - places a viewport
+   # with correct dimension
+   # around (x,y) and calls
    # NodeFunction
 	if (!is.null(node.function))
 	{
-      if (is.null(bgdata)) bgdata <- flexclust:::getData(object, error=TRUE)
-	   # add cluster index to bgdata
-
-      for (i in 1:length(x))
-      {
-         pushViewport(viewport(unit(x[i], "native"), unit(y[i], "native"), 
-                      unit(nsize[i,1], "native"), 
-                      unit(nsize[i,2], "native")))
-         node.function (object = object, cluster = i, bgdata = bgdata, ...)
-         popViewport(1)
-      }
+	     # call node.function for each node
+        for (i in 1:length(x))
+        {
+           pushViewport(viewport(unit(x[i], "native"), unit(y[i], "native"), 
+                        unit(nsize[i,1], "native"), 
+                        unit(nsize[i,2], "native")))
+           node.function (cluster = i, bgdata = node.data, ...)
+           popViewport(1)
+        }
    } 
 	
 	# plotViewport and dataViewport
 	if (axes) popViewport(2)
 })
 
+setMethod("symbolplot", signature(x="matrix",y="missing"),
+function (x, y,
+          node.data = NULL, node.function = NodeIsNumber,
+          edge.data = NULL, edge.function = EdgeIsLineWidth, filt= 0.1,
+          xlim = NULL, ylim = NULL,
+          asize = NULL, rsize = NULL,
+          axes = FALSE,
+          keepAspectRatio = TRUE,
+          ...)
+{
+   # check argument "x".
+   if (dim(x)[1] == 2) 
+   {
+      y <- x[,2]
+      x <- x[,1]
+   }
+   else if (dim(x)[1] == 2)
+   {
+      y <- x[2,]
+      x <- x[1,]
+   }
+   else
+   {
+      stop("If 'y' is not given, 'x' must be
+            a matrix with two columns or two rows.")
+   }
+   # call generic symbolplot.
+   symbolplot(x = x, y = y,
+              node.data = node.data, node.function = node.function,
+              edge.data = edge.data, edge.function = edge.function,
+              filt = filt,
+              xlim = xlim, ylim = ylim,
+              asize = asize, rsize = rsize,
+              axes = axes,
+              keepAspectRatio = keepAspectRatio, 
+              ...)
+})
+
+setMethod("symbolplot", signature(x="kcca",y="missing"),
+function (x, y,
+          node.data = NULL, node.function = NodeIsNumber,
+          edge.data = NULL, edge.function = EdgeIsLineWidth, filt= 0.1,
+          xlim = NULL, ylim = NULL,
+          asize = NULL, rsize = NULL,
+          axes = FALSE,
+          keepAspectRatio = TRUE,
+          which=1:2, project = NULL,
+          ...)
+{
+   # kcca-Objekt behandeln und argumente umbauen für generische
+   # symbolplot funktion.
+   
+   require(flexclust)
+
+   edge.data <- clusterSim(x)
+   object <- x
+   
+	# check argument which
+   if(length(which)!= 2)
+      stop(sQuote("which"), " must have length 2")
+
+   # compute 2d-Data from centers
+   if (is.null(project))
+   {
+      project <- function(x) x
+   }
+   else
+   {
+      if(!is(project, "function"))
+      {
+         lyt <- project
+         project <- function(x) Predict(lyt, x)
+      }
+   }
+   x <- project(object@centers)[,which]
+   y <- x[,2]
+   x <- x[,1]
+
+   if (is.null(node.data))
+      node.data <- flexclust:::getData(object, error=TRUE)
+
+   # call generic symbolplot
+   symbolplot(x = x, y = y,
+              node.data = node.data, node.function = node.function,
+              edge.data = edge.data, edge.function = edge.function,
+              filt = filt,
+              xlim = xlim, ylim = ylim,
+              asize = asize, rsize = rsize,
+              axes = axes,
+              keepAspectRatio = keepAspectRatio,
+              object = object,
+              ...)
+})
+
 # a simple edge drawing function
-                                                                                                                
+
 EdgeIsLineWidth <- function (LineWidth=1) {
         grid.move.to (0, 0)
         grid.line.to (1, 1, gp=gpar(lwd=LineWidth))
@@ -157,9 +214,9 @@ EdgeIsLine <- function (LineWidth=1) {
 
 # default node drawing function
 
-NodeIsCircle <- function (object, cluster, bgdata){
-        grid.circle (0.5, 0.5, r=unit(0.15,"inches"), gp=gpar(fill="white"))
-        if (!is.null(bgdata)) grid.text (cluster, 0.5, 0.5, just="center", gp=gpar(fontface="bold"))
+NodeIsNumber <- function (object, cluster, bgdata){
+        grid.circle(0.5, 0.5, r=unit(0.15,"inches"), gp=gpar(fill="white"))
+        grid.text(cluster, 0.5, 0.5, just="center", gp=gpar(fontface="bold"))
 }
 
 # euclidean distance
@@ -230,17 +287,18 @@ GetSquare <- function (xsorted, ysorted, xlim, ylim, dx, dy) {
 	n = length (xsorted)
 	if (dx > dy) d = dx
 	else d = dy
-	a = min (d, 2*(xsorted[1]-xmin), 2*(xmax-xsorted[n]), 2*(ysorted[1]-ymin), 2*(ymax-ysorted[n]))
+	a = min (d, 2*(xsorted[1]-xmin), 2*(xmax-xsorted[n]), 2*(ysorted[1]-ymin), 
+	         2*(ymax-ysorted[n]))
 	a
 }
 
-# DrawEdges - place viewports between all the nodes and call EdgeFunction, which should
-# draw an edge (or whatever) then.
+# DrawEdges - place viewports between all the nodes and call EdgeFunction, 
+# which should draw an edge (or whatever) then.
 # The nodes are at (0,0) and (1,1)
 
-DrawEdges <- function (x, y, edge.function, filt=0, object, clsim) {
+DrawEdges <- function (x, y, edge.function, filt=0, edge.data) {
 	n=length (x)
-	SymSimMat <- (clsim+t(clsim))/2
+	SymSimMat <- (edge.data+t(edge.data))/2
 	for (i in 1:(n-1)) {
 		for (j in (i+1):n) {
 			if (SymSimMat[i,j] >= filt)
@@ -252,7 +310,8 @@ DrawEdges <- function (x, y, edge.function, filt=0, object, clsim) {
 				# center of viewport is half between the two nodes 
 				vx = x[i] + dx/2
 				vy = y[i] + dy/2
-				# and finally create the viewport, call the function and pop the viewport
+				# and finally create the viewport,
+				# call the function and pop the viewport
 				pushViewport (viewport (unit(vx, "native"), unit(vy, "native"), 
 					unit(dx, "native"), unit(dy, "native")))
 				do.call ("edge.function", list(LineWidth=SymSimMat[i,j]*10))
@@ -285,9 +344,10 @@ GetViewportSizes <- function (x, y, NodeSize, rsize, xlim, ylim) {
 	NodeSize
 }
 
-# GetCorners - at the beginning, a dataViewport is put onto the stack. dataViewport
-# takes a set of points as arguments. GetCorners computes depending on its arguments
-# two points in the lower left and upper right corner to take advantage of dataViewport
+# GetCorners - at the beginning, a dataViewport is put onto the stack. 
+# dataViewport takes a set of points as arguments. GetCorners computes 
+# depending on its arguments two points in the lower left and upper right 
+# corner to take advantage of dataViewport
 
 GetCorners <- function (x, y, NodeSize, xlim, ylim)
 {

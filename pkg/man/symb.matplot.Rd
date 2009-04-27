@@ -1,12 +1,12 @@
-\name{grid.matplot}
-\alias{grid.matplot}
+\name{symb.matplot}
+\alias{symb.matplot}
 \title{ Plot Columns of Matrices in Grid Viewport }
 \description{
   Similar to \code{matplot} function, but drawn in grid viewport:
   Plot the columns of one matrix against the columns of another.
 }
 \usage{
-grid.matplot(x, y, type = "p", lty = 1:5, lwd = 1, pch = NULL, 
+symb.matplot(x, y, type = "p", lty = 1:5, lwd = 1, pch = NULL, 
              col = 1, cex = NULL, xlim = NULL, ylim = NULL, 
              ..., verbose = getOption("verbose"))
 }
@@ -59,34 +59,28 @@ grid.matplot(x, y, type = "p", lty = 1:5, lwd = 1, pch = NULL,
 }
 \author{ Original code by the R Core development team.
          Modified by Ingo Voglhuber. }
-\seealso{ \code{\link{grid.barplot}}, \code{\link{grid.pie}},
-  \code{\link{grid.stars}}, \code{\link{grid.symbols}}, 
-  \code{\link{grid.bxp}}
+\seealso{ \code{\link{symb.barplot}}, \code{\link{symb.pie}},
+  \code{\link{symb.stars}}, \code{\link{symb.symbols}}, 
+  \code{\link{symb.bxp}}
 }
 \examples{
 require(grDevices)
 
 grid.newpage()
 
-## create viewport
-vp <- viewport(0.25,0.75,0.45,0.45)
-pushViewport(vp)
- grid.rect()
- grid.matplot((-4:5)^2)
-popViewport()
-## create viewport
-vp <- viewport(0.25,0.25,0.45,0.45)
-pushViewport(vp)
- sines <- outer(1:20, 1:4, function(x, y) sin(x / 20 * pi * y))
- grid.rect()
- grid.matplot(sines, pch = 1:4, type = "o", 
-              col = rainbow(ncol(sines)))
-popViewport()
-## create viewport
-vp <- viewport(0.75,0.5,0.45,0.45)
-pushViewport(vp)
- grid.rect()
- grid.matplot(sines, type = "l", pch = 21:23, col = 2:5)
-popViewport()
+grid.rect()
+symb.matplot((-4:5)^2)
+
+grid.newpage()
+
+sines <- outer(1:20, 1:4, function(x, y) sin(x / 20 * pi * y))
+grid.rect()
+symb.matplot(sines, pch = 1:4, type = "o", 
+             col = rainbow(ncol(sines)))
+
+grid.newpage()
+
+grid.rect()
+symb.matplot(sines, type = "l", pch = 21:23, col = 2:5)
 }
 \keyword{hplot}

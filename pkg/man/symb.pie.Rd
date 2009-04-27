@@ -1,11 +1,11 @@
-\name{grid.pie}
-\alias{grid.pie}
+\name{symb.pie}
+\alias{symb.pie}
 \title{ Grid-Based Pie Charts }
 \description{
   Draw a grid-based pie chart.
 }
 \usage{
-grid.pie(x, labels = names(x), edges = 200, radius = 0.8,
+symb.pie(x, labels = names(x), edges = 200, radius = 0.8,
          clockwise = FALSE,
          init.angle = if (clockwise) 90 else 0,
          col = NULL, border = NULL, 
@@ -38,34 +38,34 @@ grid.pie(x, labels = names(x), edges = 200, radius = 0.8,
   \item{lty}{ argument linetype passed to \code{grid.polygon} }
 }
 \author{ Original code by Thomas S. Dye. Modified by Ingo Voglhuber. }
-\seealso{ \code{\link{grid.barplot}}, \code{\link{grid.matplot}},
-  \code{\link{grid.stars}}, \code{\link{grid.symbols}},
-  \code{\link{grid.bxp}}
+\seealso{ \code{\link{symb.barplot}}, \code{\link{symb.matplot}},
+  \code{\link{symb.stars}}, \code{\link{symb.symbols}},
+  \code{\link{symb.bxp}}
 }
 \examples{
 grid.newpage()
 
-grid.pie(rep(1, 24), col = rainbow(24), radius = 0.9)
+symb.pie(rep(1, 24), col = rainbow(24), radius = 0.9)
 
 grid.newpage()
 
 pie.sales <- c(0.12, 0.3, 0.26, 0.16, 0.04, 0.12)
 names(pie.sales) <- c("Blueberry", "Cherry",
     "Apple", "Boston Cream", "Other", "Vanilla Cream")
-grid.pie(pie.sales) # default colours
+symb.pie(pie.sales) # default colours
 
 grid.newpage()
 
-grid.pie(pie.sales,
+symb.pie(pie.sales,
     col = c("purple", "violetred1", "green3", 
             "cornsilk", "cyan", "white"))
 
 grid.newpage()
 
-grid.pie(pie.sales, col = gray(seq(0.4,1.0,length=6)))
+symb.pie(pie.sales, col = gray(seq(0.4,1.0,length=6)))
 
 grid.newpage()
 
-grid.pie(pie.sales, clockwise=TRUE)
+symb.pie(pie.sales, clockwise=TRUE)
 }
 \keyword{hplot}

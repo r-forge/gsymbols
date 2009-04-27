@@ -1,4 +1,4 @@
-grid.symbols <- function(x, y = NULL, circles, squares, rectangles, stars,
+symb.symbols <- function(x, y = NULL, circles, squares, rectangles, stars,
              thermometers, boxplots, fg = par("col"), bg = par("col"), ...)
 {
 	 if (is.null(y)) {
