@@ -2,7 +2,7 @@ Package: symbols
 Type: Package
 Title: Visualization Tools for Cluster Solutions
 Depends: grid
-Imports: methods, grid, stats, stats4, graphics
+Imports: methods, grid, stats, stats4, graphics, Rgraphviz
 Suggests: flexclust
 Version: 0.13
 Date: 2009-04-27
