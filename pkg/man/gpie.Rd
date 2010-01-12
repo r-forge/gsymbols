@@ -1,15 +1,13 @@
-\name{symb.pie}
-\alias{symb.pie}
+\name{gpie}
+\alias{gpie}
 \title{ Grid-Based Pie Charts }
 \description{
   Draw a grid-based pie chart.
 }
 \usage{
-symb.pie(x, labels = names(x), edges = 200, radius = 0.8,
-         clockwise = FALSE,
-         init.angle = if (clockwise) 90 else 0,
-         col = NULL, border = NULL, 
-         lty = NULL)
+gpie(x, labels = names(x), edges = 200, radius = 0.8,
+     clockwise = FALSE, init.angle = if (clockwise) 90 else 0,
+     col = NULL, border = NULL, lty = NULL)
 }
 \arguments{
   \item{x}{ a vector of non-negative numerical quantities. The values in
@@ -38,34 +36,34 @@ symb.pie(x, labels = names(x), edges = 200, radius = 0.8,
   \item{lty}{ argument linetype passed to \code{grid.polygon} }
 }
 \author{ Original code by Thomas S. Dye. Modified by Ingo Voglhuber. }
-\seealso{ \code{\link{symb.barplot}}, \code{\link{symb.matplot}},
-  \code{\link{symb.stars}}, \code{\link{symb.symbols}},
-  \code{\link{symb.bxp}}
+\seealso{ \code{\link{gbarplot}}, \code{\link{gmatplot}},
+  \code{\link{gstars}}, \code{\link{gsymbols}},
+  \code{\link{gbxp}}
 }
 \examples{
 grid.newpage()
 
-symb.pie(rep(1, 24), col = rainbow(24), radius = 0.9)
+gpie(rep(1, 24), col = rainbow(24), radius = 0.9)
 
 grid.newpage()
 
 pie.sales <- c(0.12, 0.3, 0.26, 0.16, 0.04, 0.12)
 names(pie.sales) <- c("Blueberry", "Cherry",
     "Apple", "Boston Cream", "Other", "Vanilla Cream")
-symb.pie(pie.sales) # default colours
+gpie(pie.sales) # default colours
 
 grid.newpage()
 
-symb.pie(pie.sales,
+gpie(pie.sales,
     col = c("purple", "violetred1", "green3", 
             "cornsilk", "cyan", "white"))
 
 grid.newpage()
 
-symb.pie(pie.sales, col = gray(seq(0.4,1.0,length=6)))
+gpie(pie.sales, col = gray(seq(0.4,1.0,length=6)))
 
 grid.newpage()
 
-symb.pie(pie.sales, clockwise=TRUE)
+gpie(pie.sales, clockwise=TRUE)
 }
 \keyword{hplot}

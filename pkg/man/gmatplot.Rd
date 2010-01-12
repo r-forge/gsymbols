@@ -1,14 +1,13 @@
-\name{symb.matplot}
-\alias{symb.matplot}
+\name{gmatplot}
+\alias{gmatplot}
 \title{ Plot Columns of Matrices in Grid Viewport }
 \description{
   Similar to \code{matplot} function, but drawn in grid viewport:
   Plot the columns of one matrix against the columns of another.
 }
 \usage{
-symb.matplot(x, y, type = "p", lty = 1:5, lwd = 1, pch = NULL, 
-             col = 1, cex = NULL, xlim = NULL, ylim = NULL, 
-             ..., verbose = getOption("verbose"))
+gmatplot(x, y, type = "p", lty = 1:5, lwd = 1, pch = NULL, 
+         col = 1, cex = NULL, xlim = NULL, ylim = NULL, ...)
 }
 \arguments{
   \item{x,y}{ vectors or matrices of data for plotting.  The number of rows
@@ -41,7 +40,6 @@ symb.matplot(x, y, type = "p", lty = 1:5, lwd = 1, pch = NULL,
   \item{\dots}{ Graphical parameters (see \code{gpar}).
     Hence, the high-level graphics control arguments described
     under \code{gpar}. }
-  \item{verbose}{ logical.  If \code{TRUE}, write one line of what is done. }
 }
 \details{
   Points involving missing values are not plotted.
@@ -59,9 +57,9 @@ symb.matplot(x, y, type = "p", lty = 1:5, lwd = 1, pch = NULL,
 }
 \author{ Original code by the R Core development team.
          Modified by Ingo Voglhuber. }
-\seealso{ \code{\link{symb.barplot}}, \code{\link{symb.pie}},
-  \code{\link{symb.stars}}, \code{\link{symb.symbols}}, 
-  \code{\link{symb.bxp}}
+\seealso{ \code{\link{gbarplot}}, \code{\link{gpie}},
+  \code{\link{gstars}}, \code{\link{gsymbols}}, 
+  \code{\link{gbxp}}
 }
 \examples{
 require(grDevices)
@@ -69,18 +67,18 @@ require(grDevices)
 grid.newpage()
 
 grid.rect()
-symb.matplot((-4:5)^2)
+gmatplot((-4:5)^2)
 
 grid.newpage()
 
 sines <- outer(1:20, 1:4, function(x, y) sin(x / 20 * pi * y))
 grid.rect()
-symb.matplot(sines, pch = 1:4, type = "o", 
+gmatplot(sines, pch = 1:4, type = "o", 
              col = rainbow(ncol(sines)))
 
 grid.newpage()
 
 grid.rect()
-symb.matplot(sines, type = "l", pch = 21:23, col = 2:5)
+gmatplot(sines, type = "l", pch = 21:23, col = 2:5)
 }
 \keyword{hplot}

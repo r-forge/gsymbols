@@ -1,5 +1,6 @@
-\name{symb.symbols}
-\alias{symb.symbols}
+
+\name{gsymbols}
+\alias{gsymbols}
 \title{ Grid-Based 'symbols' Function }
 \description{
   Similar to \code{symbols} function, but drawn in grid viewport:
@@ -11,9 +12,9 @@
   can be customized by additional parameters.
 }
 \usage{
-symb.symbols(x, y = NULL, circles, squares, rectangles,
-             stars, thermometers, boxplots, 
-             fg = par("col"), bg = par("col"), ...)
+gsymbols(x, y = NULL, circles, squares, rectangles,
+         stars, thermometers, boxplots, 
+         fg = par("col"), bg = par("col"), ...)
 }
 \arguments{
   \item{x, y}{ x and y co-ordinates for the centres of the symbols. }
@@ -46,8 +47,8 @@ symb.symbols(x, y = NULL, circles, squares, rectangles,
   \item{\dots}{ arguments, passed to basic grid functions (e.g. \code{gpar()} }
 }
 \author{ Ingo Voglhuber }
-\seealso{ \code{\link{symb.barplot}}, \code{\link{symb.matplot}},
-  \code{\link{symb.pie}}, \code{\link{symb.stars}}, \code{\link{symb.bxp}}
+\seealso{ \code{\link{gbarplot}}, \code{\link{gmatplot}},
+  \code{\link{gpie}}, \code{\link{gstars}}, \code{\link{gbxp}}
 }
 \examples{
 grid.newpage()
@@ -55,37 +56,37 @@ grid.newpage()
 ## circles.
 data(trees)
 attach(trees)
-symb.symbols(Height,Volume,circles=Girth/8)
+gsymbols(Height,Volume,circles=Girth/8)
 
 grid.newpage()
 
 N <- nrow(trees)
 palette(rainbow(N, end = 0.9))
-symb.symbols(Height,Volume,circles=Girth/8,gp=gpar(fill=1:N))
+gsymbols(Height,Volume,circles=Girth/8,gp=gpar(fill=1:N))
 
 grid.newpage()
 
 ## squares.
 data(trees)
 attach(trees)
-symb.symbols(Height,Volume,squares=Girth/8)
+gsymbols(Height,Volume,squares=Girth/8)
 
 grid.newpage()
 
 N <- nrow(trees)
 palette(rainbow(N, end = 0.9))
-symb.symbols(Height,Volume,squares=Girth/8,gp=gpar(fill=1:N))
+gsymbols(Height,Volume,squares=Girth/8,gp=gpar(fill=1:N))
 
 grid.newpage()
 
 ## rectangles.
 data(trees)
 attach(trees)
-symb.symbols(Height,Volume,rectangles=cbind(Girth/6,Girth/8))
+gsymbols(Height,Volume,rectangles=cbind(Girth/6,Girth/8))
 grid.newpage()
 N <- nrow(trees)
 palette(rainbow(N, end = 0.9))
-symb.symbols(Height,Volume,rectangles=cbind(Girth/6,Girth/8),
+gsymbols(Height,Volume,rectangles=cbind(Girth/6,Girth/8),
              gp=gpar(fill=1:N))
 
 grid.newpage()
@@ -95,13 +96,13 @@ x <- 1:10
 y <- sort(10 * runif(10))
 z <- runif(10)
 z <- cbind(z, 2 * runif(10), runif(10))
-symb.symbols(x,y,thermometers=z)
+gsymbols(x,y,thermometers=z)
 
 grid.newpage()
 
-symb.symbols(x,y,thermometers=z,fg=1:10)
+gsymbols(x,y,thermometers=z,fg=1:10)
 grid.newpage()
-symb.symbols(x,y,thermometers=z,fg=1:10,bg=1:10)
+gsymbols(x,y,thermometers=z,fg=1:10,bg=1:10)
 
 grid.newpage()
 
@@ -110,7 +111,7 @@ x <- 1:5
 y <- sort(10 * runif(5))
 z <- cbind(1.5*runif(5),1.5*runif(5),runif(5)/2,
            runif(5)/2,runif(5))
-symb.symbols(x,y,boxplots=z,gp = gpar(col="blue"))
+gsymbols(x,y,boxplots=z,gp = gpar(col="blue"))
 
 grid.newpage()
 
@@ -119,13 +120,13 @@ x <- 1:5
 y <- 1:5
 z <- cbind(1.5*runif(3),1.5*runif(3),runif(3)/2,
            runif(3)/2,runif(3),runif(3))
-symb.symbols(x,y,stars=z,gp = gpar(col="blue"))
+gsymbols(x,y,stars=z,gp = gpar(col="blue"))
 
 grid.newpage()
 
 x <- 1:3
 y <- 1:3
 z <- cbind(runif(15),runif(15),runif(15),runif(15))
-symb.symbols(x,y,stars=z,gp = gpar(col="blue"))
+gsymbols(x,y,stars=z,gp = gpar(col="blue"))
 }
 \keyword{hplot}

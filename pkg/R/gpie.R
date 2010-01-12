@@ -1,6 +1,6 @@
-`symb.pie` <- function (x, labels = names(x), edges = 200, radius = 0.8,
-							   clockwise = FALSE, init.angle = if (clockwise) 90 else 0,
-							   col = NULL, border = NULL, lty = NULL)
+gpie <- function (x, labels = names(x), edges = 200, radius = 0.8,
+                      clockwise = FALSE, init.angle = if (clockwise) 90 else 0,
+                      col = NULL, border = NULL, lty = NULL)
 {
     if (!is.numeric(x) || any(is.na(x) | x < 0)) 
         stop("'x' values must be positive.")

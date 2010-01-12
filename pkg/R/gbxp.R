@@ -1,4 +1,37 @@
-symb.bxp <- function (z, notch = FALSE, width = NULL, varwidth = FALSE,
+gboxplot <- function(x, ..., width = NULL, varwidth = FALSE,
+    notch = FALSE, outline = TRUE, notch.frac = 0.5, plot = TRUE, 
+    border = par("fg"), pars = NULL, frame.plot = FALSE, 
+    horizontal = FALSE, xaxis = FALSE, yaxis = FALSE, at = NULL)
+{
+    if(plot)
+    {
+        args <- list(x, ...)
+        namedargs <- if (!is.null(attributes(args)$names))
+            attributes(args)$names != ""
+        else rep(FALSE, length.out = length(args))
+
+        bx.p <- boxplot(x, ..., notch = notch, width = width,
+            varwidth = varwidth, outline = outline, notch.frac =
+            notch.frac, border = border, pars = pars, 
+            frame.plot= frame.plot, horizontal = horizontal,
+            xaxis = xaxis, yaxis = yaxis, at = at, plot=FALSE)
+        do.call("gbxp", c(list(bx.p, notch = notch, width = width,
+            varwidth = varwidth, outline = outline, notch.frac =
+            notch.frac, border = border,
+            pars = pars, frame.plot= frame.plot, horizontal = horizontal,
+            xaxis = xaxis, yaxis = yaxis, at = at), args[namedargs]))
+        invisible(bx.p)
+    }
+    else 
+        bx.p <- boxplot(x, ..., notch = notch, width = width,
+            varwidth = varwidth, outline = outline, notch.frac =
+            notch.frac, border = border, pars = pars, 
+            frame.plot= frame.plot, horizontal = horizontal,
+            xaxis = xaxis, yaxis = yaxis, at = at, plot=FALSE)
+        invisible(bx.p)
+}
+
+gbxp <- function (z, notch = FALSE, width = NULL, varwidth = FALSE,
                       outline = TRUE, notch.frac = 0.5, border = par("fg"),
                       pars = NULL, frame.plot = FALSE, horizontal = FALSE,
                       at = NULL, xaxis = FALSE, yaxis = FALSE, ...) 

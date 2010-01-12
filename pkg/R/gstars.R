@@ -1,4 +1,4 @@
-`symb.stars` <- function(x, radius=TRUE, locations="grid",
+gstars <- function(x, radius=TRUE, locations="grid",
                          draw.segments=FALSE, scale=TRUE, full=TRUE, 
                          qx=apply(x,2,quantile,probs=seq(0,1,0.1)),
                          quantile=FALSE, col.segments=TRUE, col.stars=FALSE,
@@ -71,21 +71,21 @@
         }
         if (draw.segments) {
           grid.text(dimnames(x)[[2]][i],
-		              cos((modpi * c(i-1)/ncol(x)) + (pi /ncol(x)))/2.5+0.5,
-		              sin((modpi * c(i-1)/ncol(x)) + (pi /ncol(x)))/2.5+0.5,
-		              default.units="native", gp=gpar(cex=cex))
+                    cos((modpi * c(i-1)/ncol(x)) + (pi /ncol(x)))/2.5+0.5,
+                    sin((modpi * c(i-1)/ncol(x)) + (pi /ncol(x)))/2.5+0.5,
+                    default.units="native", gp=gpar(cex=cex))
         }
         else {
            if (!full)
-              grid.text(dimnames(x)[[2]][i],
-		                  cos((modpi * c(i-1)/(ncol(x)-1)))/2.5+0.5,
-		                  sin((modpi * c(i-1)/(ncol(x)-1)))/2.5+0.5,
-		                  default.units="native", gp=gpar(cex=cex))
-		     else
-		        grid.text(dimnames(x)[[2]][i],
-		                  cos((modpi * c(i-1)/ncol(x)))/2.5+0.5,
-		                  sin((modpi * c(i-1)/ncol(x)))/2.5+0.5,
-		                  default.units="native", gp=gpar(cex=cex))
+               grid.text(dimnames(x)[[2]][i],
+                        cos((modpi * c(i-1)/(ncol(x)-1)))/2.5+0.5,
+                        sin((modpi * c(i-1)/(ncol(x)-1)))/2.5+0.5,
+                        default.units="native", gp=gpar(cex=cex))
+           else
+               grid.text(dimnames(x)[[2]][i],
+                          cos((modpi * c(i-1)/ncol(x)))/2.5+0.5,
+                          sin((modpi * c(i-1)/ncol(x)))/2.5+0.5,
+                          default.units="native", gp=gpar(cex=cex))
         }
       }
     popViewport()
@@ -191,8 +191,8 @@
       }
     }
     if ((draw.labels) && (locations == "grid")) grid.text(dimnames(x)[[1]][i],
-			posX, posY-0.35-(0.15 * (i %% 2)), default.units="native", 
-			gp=gpar(cex=cex))
+            posX, posY-0.35-(0.15 * (i %% 2)), default.units="native", 
+            gp=gpar(cex=cex))
   }
   if ((draw.labels) && (locations == "spider")) {
      if (draw.segments)

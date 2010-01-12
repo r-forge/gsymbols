@@ -1,5 +1,5 @@
-\name{symb.stars}
-\alias{symb.stars}
+\name{gstars}
+\alias{gstars}
 \title{ Grid-Based 'stars' Function }
 \description{
   Similar to \code{stars} function, but drawn in grid viewport:
@@ -7,11 +7,11 @@
   With one single location, also draws 'spider' (or 'radar') plots.
 }
 \usage{
-symb.stars(x, radius = TRUE, locations = "grid", 
-           draw.segments = FALSE, scale = TRUE, full = TRUE, 
-           qx = apply(x, 2, quantile, probs = seq(0, 1, 0.1)), 
-           quantile=FALSE, col.segments=TRUE, col.stars=FALSE, 
-           draw.labels=TRUE, key=FALSE, lwd=0.3, lty=1, cex=1)
+gstars(x, radius = TRUE, locations = "grid", 
+       draw.segments = FALSE, scale = TRUE, full = TRUE, 
+       qx = apply(x, 2, quantile, probs = seq(0, 1, 0.1)), 
+       quantile=FALSE, col.segments=TRUE, col.stars=FALSE, 
+       draw.labels=TRUE, key=FALSE, lwd=0.3, lty=1, cex=1)
 }
 \arguments{
   \item{x}{ vector, matrix or data frame of data. One star or segment plot 
@@ -65,8 +65,8 @@ symb.stars(x, radius = TRUE, locations = "grid",
   Only one page of output is produced.
 }
 \author{ Ingo Voglhuber }
-\seealso{ \code{\link{symb.barplot}}, \code{\link{symb.matplot}},
-  \code{\link{symb.pie}}, \code{\link{symb.symbols}}, \code{\link{symb.bxp}}
+\seealso{ \code{\link{gbarplot}}, \code{\link{gmatplot}},
+  \code{\link{gpie}}, \code{\link{gsymbols}}, \code{\link{gbxp}}
 }
 \examples{
 data(USJudgeRatings)
@@ -74,39 +74,39 @@ grid.newpage()
 
 ## example
 
-symb.stars(USJudgeRatings)
+gstars(USJudgeRatings)
 
 grid.newpage()
 
 ## no radii
-symb.stars(USJudgeRatings,radius=FALSE)
+gstars(USJudgeRatings,radius=FALSE)
 
 grid.newpage()
 
 ## no labels
-symb.stars(USJudgeRatings, draw.labels=FALSE)
+gstars(USJudgeRatings, draw.labels=FALSE)
 
 grid.newpage()
 
 ## segments of a circle
-symb.stars(USJudgeRatings,draw.segments=TRUE)
+gstars(USJudgeRatings,draw.segments=TRUE)
 
 grid.newpage()
 
 ## spiderplot, no labels
-symb.stars(USJudgeRatings,radius=FALSE, locations="spider", 
+gstars(USJudgeRatings,radius=FALSE, locations="spider", 
            draw.labels=FALSE)
 
 grid.newpage()
 
 ## spiderplot with quantiles in background
-symb.stars(USJudgeRatings,radius=FALSE, locations="spider", 
+gstars(USJudgeRatings,radius=FALSE, locations="spider", 
            quantile=TRUE)
 
 grid.newpage()
 
 ## spiderplot with quantiles in background
-symb.stars(USJudgeRatings,radius=FALSE, locations="spider",
+gstars(USJudgeRatings,radius=FALSE, locations="spider",
   qx=apply(USJudgeRatings,2,quantile,probs=seq(0,1,0.25)) , 
            quantile=TRUE,
   draw.labels=FALSE)
@@ -114,6 +114,6 @@ symb.stars(USJudgeRatings,radius=FALSE, locations="spider",
 grid.newpage()
 
 ## draw only labels
-symb.stars(USJudgeRatings, key=TRUE)
+gstars(USJudgeRatings, key=TRUE)
 }
 \keyword{hplot}

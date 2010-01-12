@@ -1,6 +1,6 @@
-`symb.matplot` <- function (x, y, type = "p", lty = 1:5, lwd = 1,
-									 pch = NULL, col = 1, cex = NULL, xlim = NULL,
-									 ylim = NULL, ..., verbose = getOption("verbose")) 
+gmatplot <- function (x, y, type = "p", lty = 1:5, lwd = 1,
+                          pch = NULL, col = 1, cex = NULL, xlim = NULL,
+                          ylim = NULL, ...)
 {
     paste.ch <- function(chv) paste("\"", chv, "\"", sep = "", 
         collapse = " ")
@@ -44,10 +44,10 @@
     }
     else if (is.character(pch)) 
         pch <- str2vec(pch)
-    if (verbose) 
-        message("matplot: doing ", k, " plots with ", paste(" col= (", 
-            paste.ch(col), ")", sep = ""), paste(" pch= (", paste.ch(pch), 
-            ")", sep = ""), " ...\n", domain = NA)
+#    if (verbose) 
+#        message("matplot: doing ", k, " plots with ", paste(" col= (", 
+#            paste.ch(col), ")", sep = ""), paste(" pch= (", paste.ch(pch), 
+#            ")", sep = ""), " ...\n", domain = NA)
     ii <- match("log", names(xargs <- list(...)), nomatch = 0)
     log <- if (ii != 0) 
         xargs[[ii]]
@@ -71,27 +71,27 @@
     if (length(cex) < k) 
         cex <- rep(cex, length.out = k)
     ii <- 1:k
-	 if (is.null(xlim)) { xlim <- c(min(x), max(x)) }
-	 if (is.null(ylim)) { ylim <- c(min(y), max(y)) }
+    if (is.null(xlim)) { xlim <- c(min(x), max(x)) }
+    if (is.null(ylim)) { ylim <- c(min(y), max(y)) }
     pushViewport(viewport(0.5,0.5,0.98,0.98))
-	 if ( ( type == "p" ) || ( type == "o" ) )
-	 {
-      for (i in ii) {
-			grid.points((x[, i]-xlim[1])/(xlim[2]-xlim[1]),
-							(y[, i]-ylim[1])/(ylim[2]-ylim[1]),
-						   pch = pch[i], gp = gpar(lty = lty[i],
-						   lwd = lwd[i], col = col[i], cex = cex[i]), ...)
-      }
+    if ( ( type == "p" ) || ( type == "o" ) )
+    {
+        for (i in ii) {
+            grid.points((x[, i]-xlim[1])/(xlim[2]-xlim[1]),
+                        (y[, i]-ylim[1])/(ylim[2]-ylim[1]),
+                        pch = pch[i], gp = gpar(lty = lty[i],
+                        lwd = lwd[i], col = col[i], cex = cex[i]), ...)
+        }
     }
-	 if ( ( type == "l" ) || ( type == "o" ) )
-	 {
-      for (i in ii) {
-         grid.lines((x[, i]-xlim[1])/(xlim[2]-xlim[1]),
-         			  (y[, i]-ylim[1])/(ylim[2]-ylim[1]),
-						  gp = gpar(lty = lty[i], lwd = lwd[i],
-						  col = col[i], cex = cex[i]), ...)
-      }
+    if ( ( type == "l" ) || ( type == "o" ) )
+        {
+        for (i in ii) {
+            grid.lines((x[, i]-xlim[1])/(xlim[2]-xlim[1]),
+                       (y[, i]-ylim[1])/(ylim[2]-ylim[1]),
+                       gp = gpar(lty = lty[i], lwd = lwd[i],
+                       col = col[i], cex = cex[i]), ...)
+        }
     }
-	 popViewport()
+    popViewport()
 }
 

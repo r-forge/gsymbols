@@ -1,14 +1,12 @@
-Package: symbols
+Package: gsymbols
 Type: Package
-Title: Visualization Tools for Cluster Solutions
+Title: Grid-based symbols
 Depends: grid
-Imports: methods, grid, stats, stats4, graphics, Rgraphviz
-Suggests: flexclust
-Version: 0.13
-Date: 2009-04-27
-Author: Ingo Voglhuber
-Maintainer: Ingo Voglhuber <ingo.voglhuber@aon.at>
-Description: Several tools for visualization of cluster solutions for
-  flexclust and gcExplorer.
+Imports: methods, grid, stats, stats4, graphics
+Version: 0.2-0
+Date: 2010-01-12
+Author: Ingo Voglhuber, Theresa Scharl
+Maintainer: Theresa Scharl <theresa.scharl@ci.tuwien.ac.at>
+Description: Grid-based matplots, boxplots, barplots, stars and symbols for visualization in arbitrary context like maps or cluster solutions.
 License: GPL-2
 LazyLoad: yes

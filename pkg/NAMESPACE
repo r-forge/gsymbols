@@ -1,13 +1,14 @@
 export(
-   "symb.barplot",
-   "symb.bxp",
-   "symb.matplot",
-   "symb.pie",
-   "symb.stars",
-   "symb.symbols",
-   "gridnodes"
+   "gbarplot",
+   "gbxp",
+   "gboxplot",
+   "gmatplot",
+   "gpie",
+   "gstars",
+   "gsymbols" #,
+#   "gridnodes" moved to gcExplorer
    )
 
-exportMethods(
-   "symbolplot"
-   )
+#exportMethods(
+#   "symbolplot"  moved to gcExplorer
+#   )
